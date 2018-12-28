@@ -5,7 +5,7 @@ import os
 import sys
 from shutil import rmtree
 
-from setuptools import setup, Command
+from setuptools import setup, Command, find_packages
 
 # Package meta-data.
 NAME = 'nrql-simple'
@@ -14,7 +14,7 @@ URL = 'https://github.com/anthonybloomer/nrql-simple'
 EMAIL = 'ant0@protonmail.ch'
 AUTHOR = 'Anthony Bloomer'
 REQUIRES_PYTHON = '>=2.7.10'
-VERSION = "1.0.1"
+VERSION = None
 LICENSE = 'MIT'
 REQUIRED = [
     'requests', 'pygments'
@@ -24,6 +24,14 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 with open("README.rst", "rb") as f:
     long_descr = f.read().decode("utf-8")
+
+# Load the package's __version__.py module as a dictionary.
+about = {}
+if not VERSION:
+    with open(os.path.join(here, '__version__.py')) as f:
+        exec (f.read(), about)
+else:
+    about['__version__'] = VERSION
 
 
 class UploadCommand(Command):
@@ -57,6 +65,7 @@ class UploadCommand(Command):
         os.system('twine upload dist/*')
 
         self.status('Pushing git tags…')
+        os.system('git tag v{0}'.format(about['__version__']))
         os.system('git push --tags')
 
         sys.exit()
@@ -64,16 +73,17 @@ class UploadCommand(Command):
 
 setup(
     name=NAME,
-    version=VERSION,
+    version=about['__version__'],
     description=DESCRIPTION,
-    long_descr=long_descr,
+    packages=find_packages(exclude=('tests',)),
+    long_description=long_descr,
     author=AUTHOR,
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
     py_modules=['nrql'],
     entry_points={
-        'console_scripts': ['nrql=app:main'],
+        'console_scripts': ['nrql = nrql.app:main']
     },
     install_requires=REQUIRED,
     include_package_data=True,
