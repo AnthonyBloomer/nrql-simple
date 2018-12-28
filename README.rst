@@ -17,7 +17,6 @@ nrql-simple using pip.
    virtualenv env
    source env/bin/activate
    pip install nrql-simple
-   To install the development version, run:
 
 To install the development version, run:
 

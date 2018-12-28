@@ -11,11 +11,9 @@ nrql-simple is available on the [Python Package Index (PyPI)](https://pypi.org/p
 virtualenv env
 source env/bin/activate
 pip install nrql-simple
-To install the development version, run:
 ```
 
 To install the development version, run:
-
 
 ```
 pip install https://github.com/AnthonyBloomer/nrql-simple/archive/master.zip
