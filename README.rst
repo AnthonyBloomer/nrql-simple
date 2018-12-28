@@ -5,6 +5,26 @@ nrql-simple provides a dead-simple way to interact with the New Relic
 Insights query API. You can interact with this library programmatically
 or via the Command Line.
 
+Installation
+------------
+
+nrql-simple is available on the `Python Package Index
+(PyPI) <https://pypi.org/project/nrql-simple/>`__. You can install
+nrql-simple using pip.
+
+::
+
+   virtualenv env
+   source env/bin/activate
+   pip install nrql-simple
+   To install the development version, run:
+
+To install the development version, run:
+
+::
+
+   pip install https://github.com/AnthonyBloomer/nrql-simple/archive/master.zip
+
 About
 -----
 

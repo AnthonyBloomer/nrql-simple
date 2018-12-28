@@ -25,6 +25,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 with open("README.rst", "rb") as f:
     long_descr = f.read().decode("utf-8")
 
+
 class UploadCommand(Command):
     """Support setup.py upload."""
 
