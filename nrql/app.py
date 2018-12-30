@@ -1,4 +1,4 @@
-from api import NRQL
+from .api import NRQL
 import json
 from argparse import ArgumentParser
 
