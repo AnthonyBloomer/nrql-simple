@@ -64,6 +64,6 @@ class NRQL(object):
             self._url = self._eu_url
         req = requests.get(self._url % (self.account_id, stmt), headers={"X-Query-Key": self.api_key})
         response = req.json()
-        if self.verbose:
+        if not self.verbose:
             response = response['results']
         return response

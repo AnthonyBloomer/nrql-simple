@@ -11,6 +11,7 @@ def main():
     parser.add_argument('--verbose', '--v',
                         dest='verbose',
                         action='store_true',
+                        default=False,
                         help="Pass this flag if you want the whole response. "
                              "The program only outputs the results array by default.")
     parser.add_argument('region',

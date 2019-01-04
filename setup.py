@@ -9,7 +9,7 @@ from setuptools import setup, Command, find_packages
 
 # Package meta-data.
 NAME = 'nrql-simple'
-DESCRIPTION = 'A dead-simple tool to interact with the New Relic Insights query API. You can interact with this library programmatically or via the Command Line.'
+DESCRIPTION = 'nrql-simple is a small Python library that provides a convenient way to interact with the New Relic Insights query API. You can interact with this library programmatically or via the Command Line.'
 URL = 'https://github.com/anthonybloomer/nrql-simple'
 EMAIL = 'ant0@protonmail.ch'
 AUTHOR = 'Anthony Bloomer'
