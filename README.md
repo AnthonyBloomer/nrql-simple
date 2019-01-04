@@ -1,6 +1,6 @@
 # nrql-simple
 
-nrql-simple provides a dead-simple way to interact with the New Relic Insights query API. You can interact with this library programmatically or via the Command Line.
+nrql-simple is a small Python library that provides a convenient way to interact with the [New Relic Insights query API](https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api). You can interact with this library programmatically or via the Command Line.
 
 ## Installation
 
@@ -75,72 +75,18 @@ The above command will output JSON formatted like this:
 
 ``` json
 {
-    "metadata": {
-        "beginTime": "2018-10-01T00:00:00Z", 
-        "beginTimeMillis": 1538352000000, 
-        "contents": [
-            {
-                "attribute": "containerId", 
-                "function": "uniquecount", 
-                "simple": true
-            }
-        ], 
-        "endTime": "2018-12-28T19:46:49Z", 
-        "endTimeMillis": 1546026409529, 
-        "eventType": "NrDailyUsage", 
-        "eventTypes": [
-            "NrDailyUsage"
-        ], 
-        "guid": "40507b80-9084-b36e-0de4-ceb3e617c7fa", 
-        "messages": [], 
-        "openEnded": true, 
-        "rawCompareWith": "", 
-        "rawSince": "THIS QUARTER", 
-        "rawUntil": "NOW", 
-        "routerGuid": "790fecc4-a57d-4f35-88c9-6acc8f5a413c"
-    }, 
-    "performanceStats": {
-        "cacheMisses": 1, 
-        "cacheSkipped": 2, 
-        "decompressedBytes": 72593, 
-        "decompressionCacheEnabledCount": 0, 
-        "decompressionCacheGetTime": 0, 
-        "decompressionCachePutTime": 0, 
-        "decompressionCount": 0, 
-        "decompressionOutputBytes": 0, 
-        "decompressionTime": 0, 
-        "fileProcessingTime": 69, 
-        "fileReadCount": 179, 
-        "fullCacheHits": 176, 
-        "ignoredFiles": 0, 
-        "inspectedCount": 11470, 
-        "ioBytes": 0, 
-        "ioTime": 0, 
-        "matchCount": 264, 
-        "maxInspectedCount": 243, 
-        "mergeTime": 0, 
-        "minInspectedCount": 1, 
-        "omittedCount": 0, 
-        "partialCacheHits": 0, 
-        "processCount": 174, 
-        "rawBytes": 31159, 
-        "responseBodyBytes": 29601, 
-        "runningQueriesTotal": 2113, 
-        "slowLaneFileProcessingTime": 0, 
-        "slowLaneFiles": 0, 
-        "slowLaneWaitTime": 0, 
-        "subqueryWeightUpdates": 0, 
-        "sumFileProcessingTimePercentile": 0.0, 
-        "sumSubqueryWeight": 174.0, 
-        "sumSubqueryWeightStartFileProcessingTime": 189149, 
-        "wallClockTime": 71
-    }, 
     "results": [
         {
             "uniqueCount": 175
         }
     ]
 }
+```
+
+By default the program will just output the results array. To output the entire response, pass the `--verbose` flag.
+
+```
+nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" --verbose
 ```
 
 ## Contributing
