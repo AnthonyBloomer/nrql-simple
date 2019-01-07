@@ -70,7 +70,7 @@ for k in req['facets']:
 
 ### Command Line Usage
 
-``` bash
+```
 
 usage: nrql-simple [-h] [--verbose] stmt [region]
 

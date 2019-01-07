@@ -95,7 +95,7 @@ IDs for each application since this quarter.
 Command Line Usage
 ~~~~~~~~~~~~~~~~~~
 
-.. code:: bash
+::
 
 
    usage: nrql-simple [-h] [--verbose] stmt [region]

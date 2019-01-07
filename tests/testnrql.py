@@ -7,7 +7,6 @@ class NRQLTests(unittest.TestCase):
 
     def test_query(self):
         nrql = NRQL()
-        nrql.environment = "production"
         req = nrql.query("select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter")
         self.assertIn('facets', req)
         self.assertTrue(len(req['facets']) > 0)

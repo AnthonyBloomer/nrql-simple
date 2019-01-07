@@ -55,7 +55,7 @@ class NRQL(object):
 
     def query(self, stmt):
 
-        if not self.environment:
+        if self.environment is None:
             nr_api_key = os.environ.get('NR_API_KEY')
             nr_account_id = os.environ.get('NR_ACCOUNT_ID')
         else:

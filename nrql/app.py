@@ -25,6 +25,7 @@ def main():
     nrql = NRQL()
     nrql.region = args.region
     nrql.verbose = args.verbose
+    nrql.environment = args.environment
     req = nrql.query(args.stmt)
     formatted_json = json.dumps(req, sort_keys=True, indent=4)
     colorful_json = highlight(str(formatted_json).encode('utf-8'), lexers.JsonLexer(), formatters.TerminalFormatter())
