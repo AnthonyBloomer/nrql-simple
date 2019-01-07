@@ -18,6 +18,9 @@ def main():
                         nargs='?',
                         default='US',
                         help="Pass this flag to set your region (EU or US) By default the region is set to US.")
+    parser.add_argument('environment',
+                        nargs='?',
+                        help="Environment handler.")
     args = parser.parse_args()
     nrql = NRQL()
     nrql.region = args.region
