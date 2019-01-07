@@ -7,7 +7,8 @@ from pygments import highlight, lexers, formatters
 
 def main():
     parser = ArgumentParser(prog='nrql-simple')
-    parser.add_argument('stmt', help="The NRQL statement.")
+    parser.add_argument('stmt',
+                        help="The NRQL statement.")
     parser.add_argument('--verbose', '--v',
                         dest='verbose',
                         action='store_true',

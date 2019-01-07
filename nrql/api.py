@@ -54,17 +54,23 @@ class NRQL(object):
         self._environment = environment
 
     def query(self, stmt):
+
         if not self.api_key or not self.account_id:
             if os.environ.get('NR_API_KEY') and os.environ.get('NR_ACCOUNT_ID'):
                 self._api_key = os.environ.get('NR_API_KEY')
                 self._account_id = os.environ.get('NR_ACCOUNT_ID')
             else:
                 raise Exception("An api key and account id is required.")
+
         if not self.region == 'US':
             self._url = self._eu_url
+
         req = requests.get(self._url % (self.account_id, stmt), headers={"X-Query-Key": self.api_key})
+
         response = req.json()
+
         if not self.verbose:
             response.pop('metadata', None)
             response.pop('performanceStats', None)
+
         return response

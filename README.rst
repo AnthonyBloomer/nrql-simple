@@ -112,8 +112,9 @@ The above command will output JSON formatted like this:
        ]
    }
 
-By default the program will just output the results array. To output the
-entire response, pass the ``--verbose`` flag.
+By default the output will not include the ``performanceStats`` or
+``metadata`` objects from the response. To output the entire JSON
+response, pass the ``--verbose`` flag.
 
 ::
 
