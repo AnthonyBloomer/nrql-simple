@@ -144,6 +144,38 @@ response, pass the ``--verbose`` flag.
 
    nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" --verbose
 
+Managing multiple accounts
+--------------------------
+
+If you wish to easily switch between accounts, you can use the
+``environment`` class method. If you are using the command line tool use
+the ``environment`` command line argument. For example:
+
+.. code:: python
+
+   from nrql.api import NRQL
+   nrql = NRQL()
+   nrql.environment = "PROD"
+
+Or via the command line:
+
+.. code:: bash
+
+   nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" environment='PROD'
+
+By default, the program looks for the environment variables
+``NR_API_KEY`` and ``NR_ACCOUNT_KEY``.
+
+If the ``environment`` argument is not none, then the program appends
+the environment string to ``NR_API_KEY``. For example:
+
+::
+
+   NR_API_KEY_PROD
+
+When naming your environment variables, ensure to follow this naming
+convention.
+
 Tests
 -----
 
