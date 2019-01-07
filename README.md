@@ -122,7 +122,7 @@ nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since t
 ## Managing multiple accounts
 
 If you wish to easily switch between accounts, you can use the `environment` class method.
-If you are using the command line tool use the `environment` command line argument. For example:
+If you are using the command line tool use the `env` command line argument. For example:
 
 ```python
 from nrql.api import NRQL
@@ -138,7 +138,7 @@ nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since t
 
 By default, the program looks for the environment variables `NR_API_KEY` and `NR_ACCOUNT_KEY`. 
 
-If the `environment` argument is not none, then the program appends the environment string to `NR_API_KEY`. For example:
+If the `env` argument is not none, then the program appends the environment string to `NR_API_KEY`. For example:
 
 ```
 NR_API_KEY_PROD
