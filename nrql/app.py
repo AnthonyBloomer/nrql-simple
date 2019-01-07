@@ -18,17 +18,22 @@ def main():
                         nargs='?',
                         default='US',
                         help="Pass this flag to set your region (EU or US) By default the region is set to US.")
-    parser.add_argument('environment',
+    parser.add_argument('env',
                         nargs='?',
                         help="Environment handler.")
     args = parser.parse_args()
+
     nrql = NRQL()
+
     nrql.region = args.region
     nrql.verbose = args.verbose
-    nrql.environment = args.environment
+    nrql.environment = args.env
+
     req = nrql.query(args.stmt)
+
     formatted_json = json.dumps(req, sort_keys=True, indent=4)
     colorful_json = highlight(str(formatted_json).encode('utf-8'), lexers.JsonLexer(), formatters.TerminalFormatter())
+
     print(colorful_json)
 
 

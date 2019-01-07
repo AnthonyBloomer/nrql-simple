@@ -98,12 +98,13 @@ Command Line Usage
 ::
 
 
-   usage: nrql-simple [-h] [--verbose] stmt [region]
+   usage: nrql-simple [-h] [--verbose] stmt [region] [env]
 
    positional arguments:
      stmt            The NRQL statement.
      region          Pass this flag to set your region (EU or US) By default the
                      region is set to US.
+     env             Environment handler.
 
    optional arguments:
      -h, --help      show this help message and exit
@@ -161,7 +162,7 @@ Or via the command line:
 
 .. code:: bash
 
-   nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" environment='PROD'
+   nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" env='PROD'
 
 By default, the program looks for the environment variables
 ``NR_API_KEY`` and ``NR_ACCOUNT_KEY``.
