@@ -65,5 +65,6 @@ class NRQL(object):
         req = requests.get(self._url % (self.account_id, stmt), headers={"X-Query-Key": self.api_key})
         response = req.json()
         if not self.verbose:
-            response = response['results']
+            response.pop('metadata', None)
+            response.pop('performanceStats', None)
         return response
