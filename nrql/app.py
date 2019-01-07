@@ -13,8 +13,7 @@ def main():
                         dest='verbose',
                         action='store_true',
                         default=False,
-                        help="Pass this flag if you want the whole response. "
-                             "The program only outputs the results array by default.")
+                        help="Pass this flag if you want the whole response.")
     parser.add_argument('region',
                         nargs='?',
                         default='US',

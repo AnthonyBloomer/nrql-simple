@@ -55,10 +55,13 @@ class NRQL(object):
 
     def query(self, stmt):
 
+        nr_api_key = os.environ.get('NR_API_KEY')
+        nr_account_id = os.environ.get('NR_ACCOUNT_ID')
+
         if not self.api_key or not self.account_id:
-            if os.environ.get('NR_API_KEY') and os.environ.get('NR_ACCOUNT_ID'):
-                self._api_key = os.environ.get('NR_API_KEY')
-                self._account_id = os.environ.get('NR_ACCOUNT_ID')
+            if nr_api_key and nr_account_id:
+                self._api_key = nr_api_key
+                self._account_id = nr_account_id
             else:
                 raise Exception("An api key and account id is required.")
 

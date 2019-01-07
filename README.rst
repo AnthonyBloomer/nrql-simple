@@ -92,9 +92,33 @@ IDs for each application since this quarter.
    for k in req['facets']:
        print("%s : %s" % (k['name'], k['results'][0]['uniqueCount']))
 
+Command Line Usage
+~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+
+   usage: nrql-simple [-h] [--verbose] stmt [region]
+
+   positional arguments:
+     stmt            The NRQL statement.
+     region          Pass this flag to set your region (EU or US) By default the
+                     region is set to US.
+
+   optional arguments:
+     -h, --help      show this help message and exit
+     --verbose, --v  Pass this flag if you want the whole response.
+
 To use the CLI, you must first export your API key and Account ID as
-environment variables. Then, simply call the ``nrql`` command with your
-NRQL statement as an argument.
+environment variables.
+
+::
+
+   $ export NR_API_KEY='YOUR_API_KEY'
+   $ export NR_ACCOUNT_ID='YOUR_ACCOUNT_ID'
+
+Then, simply call the ``nrql`` command with your NRQL statement as an
+argument.
 
 ::
 
