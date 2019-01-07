@@ -1,6 +1,8 @@
 nrql-simple
 ===========
 
+|Build Status| |codecov|
+
 nrql-simple is a small Python library that provides a convenient way to
 interact with the `New Relic Insights query
 API <https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api>`__.
@@ -117,6 +119,16 @@ entire response, pass the ``--verbose`` flag.
 
    nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" --verbose
 
+Tests
+-----
+
+The Python ``unittest`` module contains its own test discovery function,
+which you can run from the command line:
+
+::
+
+    python -m unittest discover tests/
+
 Contributing
 ------------
 
@@ -124,3 +136,8 @@ Contributing
 -  Create a new branch for what you’re going to work on.
 -  Push to your origin repository.
 -  Create a new pull request in GitHub.
+
+.. |Build Status| image:: https://travis-ci.org/AnthonyBloomer/nrql-simple.svg?branch=master
+   :target: https://travis-ci.org/AnthonyBloomer/nrql-simple
+.. |codecov| image:: https://codecov.io/gh/AnthonyBloomer/nrql-simple/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/AnthonyBloomer/nrql-simple

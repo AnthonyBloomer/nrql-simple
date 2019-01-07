@@ -1,5 +1,8 @@
 # nrql-simple
 
+[![Build Status](https://travis-ci.org/AnthonyBloomer/nrql-simple.svg?branch=master)](https://travis-ci.org/AnthonyBloomer/nrql-simple)
+[![codecov](https://codecov.io/gh/AnthonyBloomer/nrql-simple/branch/master/graph/badge.svg)](https://codecov.io/gh/AnthonyBloomer/nrql-simple)
+
 nrql-simple is a small Python library that provides a convenient way to interact with the [New Relic Insights query API](https://docs.newrelic.com/docs/insights/insights-api/get-data/query-insights-event-data-api). You can interact with this library programmatically or via the Command Line.
 
 ## Installation
@@ -88,6 +91,15 @@ By default the program will just output the results array. To output the entire 
 ```
 nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" --verbose
 ```
+
+## Tests
+
+The Python `unittest` module contains its own test discovery function, which you can run from the command line:
+
+```
+ python -m unittest discover tests/
+```
+
 
 ## Contributing
 
