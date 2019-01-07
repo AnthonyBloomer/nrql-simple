@@ -1,5 +1,4 @@
 import unittest
-from subprocess import check_output
 
 from nrql.api import NRQL
 
