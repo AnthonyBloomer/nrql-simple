@@ -1,17 +1,21 @@
 import requests
 import os
 
+INSIGHTS_URL = "https://insights-api.newrelic.com/v1/accounts/%s/query?nrql=%s"
+INSIGHTS_EU_REGION_URL = "https://insights-api.eu.newrelic.com/v1/accounts/%s/query?nrql=%s"
+
 
 class NRQL(object):
 
     def __init__(self, api_key=None, account_id=None):
         self._api_key = api_key
         self._account_id = account_id
-        self._url = "https://insights-api.newrelic.com/v1/accounts/%s/query?nrql=%s"
-        self._eu_url = "https://insights-api.eu.newrelic.com/v1/accounts/%s/query?nrql=%s"
+        self._url = INSIGHTS_URL
+        self._eu_url = INSIGHTS_EU_REGION_URL
         self._region = 'US'
         self._verbose = False
         self._environment = None
+        self._stmt = []
 
     @property
     def api_key(self):
@@ -54,7 +58,7 @@ class NRQL(object):
         self._environment = environment
 
     def query(self, stmt):
-
+        print(stmt)
         if self.environment is None:
             nr_api_key = os.environ.get('NR_API_KEY')
             nr_account_id = os.environ.get('NR_ACCOUNT_ID')
