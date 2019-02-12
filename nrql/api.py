@@ -1,6 +1,8 @@
 import requests
 import os
 
+import colorful
+
 INSIGHTS_URL = "https://insights-api.newrelic.com/v1/accounts/%s/query?nrql=%s"
 INSIGHTS_EU_REGION_URL = "https://insights-api.eu.newrelic.com/v1/accounts/%s/query?nrql=%s"
 
@@ -58,7 +60,6 @@ class NRQL(object):
         self._environment = environment
 
     def query(self, stmt):
-        print(stmt)
         if self.environment is None:
             nr_api_key = os.environ.get('NR_API_KEY')
             nr_account_id = os.environ.get('NR_ACCOUNT_ID')
@@ -76,9 +77,13 @@ class NRQL(object):
         if not self.region == 'US':
             self._url = self._eu_url
 
-        req = requests.get(self._url % (self.account_id, stmt), headers={"X-Query-Key": self.api_key})
+        req = requests.get(self._url % (self.account_id, stmt),
+                           headers={"X-Query-Key": self.api_key})
 
         response = req.json()
+        if 'metadata' in response and 'messages' in response['metadata']:
+            for message in response['metadata']['messages']:
+                print(colorful.bold(message))
 
         if not self.verbose:
             response.pop('metadata', None)
