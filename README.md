@@ -71,7 +71,7 @@ for k in req['facets']:
 ### Command Line Usage
 
 ```
-usage: nrql-simple [-h] [--verbose] [--csv] stmt [region] [env]
+usage: nrql [-h] [--verbose] [--csv] stmt [region] [env]
 
 positional arguments:
   stmt            The NRQL statement.
