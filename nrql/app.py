@@ -6,23 +6,7 @@ from argparse import ArgumentParser
 from pygments import highlight, lexers, formatters
 
 
-def export_as_csv(data, filename):
-    with open(filename, 'wb') as f:
-        w = csv.writer(f)
-        w.writerow([k for k in data[0].keys()])
-        for ele in data:
-            w.writerow([d for d in ele.itervalues()])
-
-
-def prettyjson(req):
-    formatted_json = json.dumps(req, sort_keys=True, indent=4)
-    colorful_json = highlight(str(formatted_json).encode('utf-8'),
-                              lexers.JsonLexer(),
-                              formatters.TerminalFormatter())
-    return colorful_json
-
-
-def main():
+def arg_parser():
     parser = ArgumentParser(prog='nrql-simple')
     parser.add_argument('stmt',
                         help="The NRQL statement.")
@@ -43,24 +27,36 @@ def main():
     parser.add_argument('env',
                         nargs='?',
                         help="Environment handler.")
-    parser.add_argument('filename',
-                        nargs='?',
-                        default='metrics.csv',
-                        help="Output CSV filename")
     args = parser.parse_args()
+    return args
 
+
+def export_as_csv(data, filename):
+    with open(filename, 'wb') as f:
+        w = csv.writer(f)
+        w.writerow([k for k in data[0].keys()])
+        for ele in data:
+            w.writerow([d for d in ele.itervalues()])
+
+
+def prettyjson(req):
+    formatted_json = json.dumps(req, sort_keys=True, indent=4)
+    return highlight(str(formatted_json).encode('utf-8'),
+                     lexers.JsonLexer(),
+                     formatters.TerminalFormatter())
+
+
+def main():
     nrql = NRQL()
-
+    args = arg_parser()
     nrql.region = args.region
     nrql.verbose = args.verbose
     nrql.environment = args.env
-
     req = nrql.query(args.stmt)
-
     if args.output_csv:
         if 'results' in req and 'events' in req['results'][0] and len(req['results'][0]['events']) > 0:
-            export_as_csv(req['results'][0]['events'], args.filename)
-            print("Exported to csv: %s" % args.filename)
+            export_as_csv(req['results'][0]['events'], "events.csv")
+            print("Exported to csv: metrics.csv")
         else:
             print(prettyjson(req))
     else:

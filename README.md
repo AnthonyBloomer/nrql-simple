@@ -71,14 +71,13 @@ for k in req['facets']:
 ### Command Line Usage
 
 ```
-usage: nrql [-h] [--verbose] [--csv] stmt [region] [env] [filename]
+usage: nrql-simple [-h] [--verbose] [--csv] stmt [region] [env]
 
 positional arguments:
   stmt            The NRQL statement.
   region          Pass this flag to set your region (EU or US) By default the
                   region is set to US.
   env             Environment handler.
-  filename        Output CSV filename
 
 optional arguments:
   -h, --help      show this help message and exit
@@ -146,6 +145,16 @@ NR_API_KEY_PROD
 ```
 
 When naming your environment variables, ensure to follow this naming convention.
+
+## Output as CSV
+
+To export Event data to a csv file via the CLI, pass the `--csv` argument, for example:
+
+```
+nrql "select * from Transaction where appName = 'RabbitMQ' since this quarter" --csv 
+```
+
+This will export a csv file (`events.csv`) to the current working directory.
 
 ## Tests
 
