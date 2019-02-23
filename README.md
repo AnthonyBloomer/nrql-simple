@@ -71,18 +71,19 @@ for k in req['facets']:
 ### Command Line Usage
 
 ```
-
-usage: nrql-simple [-h] [--verbose] stmt [region] [env]
+usage: nrql [-h] [--verbose] [--csv] stmt [region] [env] [filename]
 
 positional arguments:
   stmt            The NRQL statement.
   region          Pass this flag to set your region (EU or US) By default the
                   region is set to US.
   env             Environment handler.
+  filename        Output CSV filename
 
 optional arguments:
   -h, --help      show this help message and exit
   --verbose, --v  Pass this flag if you want the whole response.
+  --csv           Pass this flag to output the Event data to CSV.
 ```
 
 To use the CLI, you must first export your API key and Account ID as environment variables. 
