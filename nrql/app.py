@@ -55,8 +55,10 @@ def main():
     req = nrql.query(args.stmt)
     if args.output_csv:
         if 'results' in req and 'events' in req['results'][0] and len(req['results'][0]['events']) > 0:
+            req.pop('metadata', None)
+            req.pop('performanceStats', None)
             export_as_csv(req['results'][0]['events'], "events.csv")
-            print("Exported to csv: metrics.csv")
+            print("Exported to csv: events.csv")
         else:
             print(prettyjson(req))
     else:
