@@ -28,5 +28,5 @@ class NRQLTests(unittest.TestCase):
         self.assertEqual(cmd, 0)
 
     def test_query_cli_environment(self):
-        cmd = os.system("python -m nrql 'select * from transaction' env='PROD'")
+        cmd = os.system("python -m nrql 'select * from transaction' --env='PROD'")
         self.assertEqual(cmd, 0)

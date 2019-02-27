@@ -10,23 +10,24 @@ def arg_parser():
     parser = ArgumentParser(prog='nrql-simple')
     parser.add_argument('stmt',
                         help="The NRQL statement.")
+    parser.add_argument('--region', '--r',
+                        default='US',
+                        help="Pass this flag to set your region (EU or US) By default the region is set to US.")
+    parser.add_argument('--env', '--e',
+                        help="Environment handler.")
+    parser.add_argument('--filename', '--f',
+                        default='events.csv',
+                        help="The output CSV filename. Default is events.csv")
+    parser.add_argument('--csv', '--c',
+                        dest='output_csv',
+                        action='store_true',
+                        default=False,
+                        help="Pass this flag to output the Event data to CSV.")
     parser.add_argument('--verbose', '--v',
                         dest='verbose',
                         action='store_true',
                         default=False,
                         help="Pass this flag if you want the whole response.")
-    parser.add_argument('--csv',
-                        dest='output_csv',
-                        action='store_true',
-                        default=False,
-                        help="Pass this flag to output the Event data to CSV.")
-    parser.add_argument('region',
-                        nargs='?',
-                        default='US',
-                        help="Pass this flag to set your region (EU or US) By default the region is set to US.")
-    parser.add_argument('env',
-                        nargs='?',
-                        help="Environment handler.")
     args = parser.parse_args()
     return args
 
@@ -57,8 +58,8 @@ def main():
         if 'results' in req and 'events' in req['results'][0] and len(req['results'][0]['events']) > 0:
             req.pop('metadata', None)
             req.pop('performanceStats', None)
-            export_as_csv(req['results'][0]['events'], "events.csv")
-            print("Exported to csv: events.csv")
+            export_as_csv(req['results'][0]['events'], args.filename)
+            print("Exported to csv: %s" % args.filename)
         else:
             print(prettyjson(req))
     else:

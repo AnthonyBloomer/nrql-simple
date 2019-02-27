@@ -71,18 +71,23 @@ for k in req['facets']:
 ### Command Line Usage
 
 ```
-usage: nrql [-h] [--verbose] [--csv] stmt [region] [env]
+usage: nrql [-h] [--region REGION] [--env ENV] [--filename FILENAME]
+                   [--csv] [--verbose]
+                   stmt
 
 positional arguments:
-  stmt            The NRQL statement.
-  region          Pass this flag to set your region (EU or US) By default the
-                  region is set to US.
-  env             Environment handler.
+  stmt                  The NRQL statement.
 
 optional arguments:
-  -h, --help      show this help message and exit
-  --verbose, --v  Pass this flag if you want the whole response.
-  --csv           Pass this flag to output the Event data to CSV.
+  -h, --help            show this help message and exit
+  --region REGION, --r REGION
+                        Pass this flag to set your region (EU or US) By
+                        default the region is set to US.
+  --env ENV, --e ENV    Environment handler.
+  --filename FILENAME, --f FILENAME
+                        The output CSV filename. Default is events.csv
+  --csv, --c            Pass this flag to output the Event data to CSV.
+  --verbose, --v        Pass this flag if you want the whole response.
 ```
 
 To use the CLI, you must first export your API key and Account ID as environment variables. 
@@ -133,7 +138,7 @@ nrql.environment = "PROD"
 Or via the command line:
 
 ``` bash
-nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" env='PROD'
+nrql "select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter" --env='PROD'
 ```
 
 By default, the program looks for the environment variables `NR_API_KEY` and `NR_ACCOUNT_KEY`. 
@@ -155,6 +160,13 @@ nrql "select * from Transaction where appName = 'RabbitMQ' since this quarter" -
 ```
 
 This will export a csv file (`events.csv`) to the current working directory.
+
+To change the output file, pass the `--filename` argument:
+
+```
+nrql "select * from Transaction where appName = 'RabbitMQ' since this quarter" --csv --filename='rabbit.csv'
+```
+
 
 ## Tests
 
