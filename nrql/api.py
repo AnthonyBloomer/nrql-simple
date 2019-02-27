@@ -1,6 +1,6 @@
 import requests
 import os
-
+from .utils import export_as_csv
 import colorful
 
 INSIGHTS_URL = "https://insights-api.newrelic.com/v1/accounts/%s/query?nrql=%s"
@@ -16,8 +16,10 @@ class NRQL(object):
         self._eu_url = INSIGHTS_EU_REGION_URL
         self._region = 'US'
         self._verbose = False
+        self._csv = False
         self._environment = None
         self._stmt = []
+        self._filename = 'events.csv'
 
     @property
     def api_key(self):
@@ -42,6 +44,22 @@ class NRQL(object):
     @region.setter
     def region(self, region):
         self._region = region
+
+    @property
+    def filename(self):
+        return self._filename
+
+    @filename.setter
+    def filename(self, filename):
+        self._filename = filename
+
+    @property
+    def csv(self):
+        return self._csv
+
+    @csv.setter
+    def csv(self, csv):
+        self._csv = csv
 
     @property
     def verbose(self):
@@ -100,4 +118,8 @@ class NRQL(object):
         if not self.region == 'US':
             self._url = self._eu_url
 
-        return self._make_request(stmt)
+        resp = self._make_request(stmt)
+        if self.csv:
+            export_as_csv(resp, self.filename)
+        else:
+            return resp

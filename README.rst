@@ -201,6 +201,18 @@ To change the output file, pass the ``--filename`` argument:
 
    nrql "select * from Transaction where appName = 'RabbitMQ' since this quarter" --csv --filename='rabbit.csv'
 
+You can also export Event data programmatically:
+
+.. code:: python
+
+   nrql = NRQL()
+   nrql.csv = True
+   nrql.filename = 'events.csv'
+
+   nrql.query("select * from Transaction where appName = 'RabbitMQ' since this quarter")
+
+This will output ``events.csv`` to the current working directory.
+
 Tests
 -----
 
