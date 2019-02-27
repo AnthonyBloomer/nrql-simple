@@ -13,9 +13,9 @@ def export_as_csv(data, filename):
     res = data['results'][0]['events']
     with open(filename, 'wb') as f:
         w = csv.writer(f)
-        w.writerow([k.encode('utf-8') for k in res[0].keys()])
+        w.writerow([str(k).encode('utf-8') for k in res[0].keys()])
         for ele in res:
-            w.writerow([d.encode('utf-8') for d in ele.itervalues()])
+            w.writerow([str(d).encode('utf-8') for d in ele.itervalues()])
     print("Exported to csv: %s" % filename)
 
 
