@@ -11,7 +11,7 @@ def export_as_csv(data, filename):
         print(prettyjson(data))
         return
     res = data['results'][0]['events']
-    with open(filename, 'wb') as f:
+    with open(filename, 'w') as f:
         w = csv.writer(f)
         w.writerow([str(k).encode('utf-8') for k in res[0].keys()])
         for ele in res:
