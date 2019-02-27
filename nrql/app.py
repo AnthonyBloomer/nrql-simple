@@ -37,7 +37,7 @@ def main():
     nrql.environment = args.env
     req = nrql.query(args.stmt)
     if args.output_csv:
-        export_as_csv(req['results'][0]['events'], args.filename)
+        export_as_csv(req, args.filename)
     else:
         print(prettyjson(req))
 
