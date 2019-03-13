@@ -196,3 +196,6 @@ The Python `unittest` module contains its own test discovery function, which you
 - Push to your origin repository.
 - Create a new pull request in GitHub.
 
+## Support
+
+Please note that this is offered for use as-is without warranty. You are free to use and modify as needed. It has been created for use with New Relic, but is not a supported product of New Relic.
