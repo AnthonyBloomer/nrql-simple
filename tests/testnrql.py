@@ -17,7 +17,7 @@ class NRQLTests(unittest.TestCase):
         nrql = NRQL()
         nrql.csv = True
         nrql.filename = 'events.csv'
-        nrql.query("select * from Transaction where appName = 'RabbitMQ' since this quarter")
+        nrql.query("select * from Transaction since this quarter")
         cur_dir = os.getcwd()
         file_list = os.listdir(cur_dir)
         found = False
