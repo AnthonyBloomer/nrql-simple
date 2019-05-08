@@ -13,6 +13,12 @@ class NRQLTests(unittest.TestCase):
         for k in req['facets']:
             print("%s : %s" % (k['name'], k['results'][0]['uniqueCount']))
 
+    def test_query_percentage_char(self):
+        nrql = NRQL()
+        nrql.verbose = True
+        req = nrql.query("SELECT COUNT(*) from PageView where appName LIKE '%sandbox%' SINCE THIS quarter")
+        self.assertIn('results', req)
+
     def test_export_as_csv(self):
         nrql = NRQL()
         nrql.csv = True

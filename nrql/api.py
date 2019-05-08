@@ -3,8 +3,8 @@ import os
 from .utils import export_as_csv
 import colorful
 
-INSIGHTS_URL = "https://insights-api.newrelic.com/v1/accounts/%s/query?nrql=%s"
-INSIGHTS_EU_REGION_URL = "https://insights-api.eu.newrelic.com/v1/accounts/%s/query?nrql=%s"
+INSIGHTS_URL = "https://insights-api.newrelic.com/v1/accounts/%s/query"
+INSIGHTS_EU_REGION_URL = "https://insights-api.eu.newrelic.com/v1/accounts/%s/query"
 
 
 class NRQL(object):
@@ -93,8 +93,12 @@ class NRQL(object):
         return nr_api_key, nr_account_id
 
     def _make_request(self, query_stmt):
-        req = requests.get(self._url % (self.account_id, query_stmt),
-                           headers={"X-Query-Key": self.api_key})
+        payload = {
+            'nrql': query_stmt
+        }
+        req = requests.get(self._url % self.account_id,
+                           headers={"X-Query-Key": self.api_key},
+                           params=payload)
         if self.verbose:
             print(colorful.bold("Request URL: %s" % req.url))
             print(colorful.bold("Status Code: %s" % req.status_code))
