@@ -31,7 +31,7 @@ class NRQLTests(unittest.TestCase):
             if nrql.filename == f:
                 os.remove(f)
                 found = True
-                self.assertTrue(True)
+        self.assertTrue(found)
         if not found:
             self.fail("Failed to output CSV.")
 
