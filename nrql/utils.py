@@ -1,5 +1,6 @@
-import csv
 import json
+
+import pandas as pd
 from pygments import highlight, lexers, formatters
 
 
@@ -9,12 +10,8 @@ def export_as_csv(data, filename):
         return
     data.pop('metadata', None)
     data.pop('performanceStats', None)
-    res = data['results'][0]['events']
-    with open(filename, 'w') as f:
-        w = csv.writer(f)
-        w.writerow([k for k in res[0].keys()])
-        for ele in res:
-            w.writerow([d for d in ele.items()])
+    df = pd.DataFrame(data['results'][0]['events'])
+    df.to_csv(filename, index=False, header=True)
     print("Exported to csv: %s" % filename)
 
 
