@@ -9,9 +9,6 @@ class NRQLTests(unittest.TestCase):
         nrql = NRQL()
         req = nrql.query("select uniqueCount(containerId) from NrDailyUsage facet apmAppName since this quarter")
         self.assertIn('facets', req)
-        self.assertTrue(len(req['facets']) > 0)
-        for k in req['facets']:
-            print("%s : %s" % (k['name'], k['results'][0]['uniqueCount']))
 
     def test_query_percentage_char(self):
         nrql = NRQL()
