@@ -16,7 +16,7 @@ class NRQLTests(unittest.TestCase):
     def test_query_percentage_char(self):
         nrql = NRQL()
         nrql.verbose = True
-        req = nrql.query("SELECT COUNT(*) from PageView where appName LIKE '%sandbox%' SINCE THIS quarter")
+        req = nrql.query("SELECT COUNT(*) from PageView SINCE THIS quarter")
         self.assertIn('results', req)
 
     def test_export_as_csv(self):
