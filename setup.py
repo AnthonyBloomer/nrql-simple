@@ -17,7 +17,7 @@ REQUIRES_PYTHON = '>=2.7.10'
 VERSION = None
 LICENSE = 'MIT'
 REQUIRED = [
-    'requests', 'pygments', 'colorful'
+    'requests', 'pygments', 'colorful', 'pandas'
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))

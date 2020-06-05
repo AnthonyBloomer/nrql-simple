@@ -8,18 +8,17 @@ INSIGHTS_EU_REGION_URL = "https://insights-api.eu.newrelic.com/v1/accounts/%s/qu
 
 
 class NRQL(object):
-
     def __init__(self, api_key=None, account_id=None):
         self.api_key = api_key
         self.account_id = account_id
         self._url = INSIGHTS_URL
         self._eu_url = INSIGHTS_EU_REGION_URL
-        self._region = 'US'
+        self._region = "US"
         self._verbose = False
         self._csv = False
         self._environment = None
         self._stmt = []
-        self._filename = 'events.csv'
+        self._filename = "events.csv"
 
     @property
     def api_key(self):
@@ -79,34 +78,38 @@ class NRQL(object):
 
     @staticmethod
     def _print_messages(response):
-        if 'metadata' in response and 'messages' in response['metadata']:
-            for message in response['metadata']['messages']:
+        if "metadata" in response and "messages" in response["metadata"]:
+            for message in response["metadata"]["messages"]:
                 print(colorful.bold(message))
 
     def _multiple_account_handler(self):
         if self.environment is None:
-            nr_api_key = os.environ.get('NR_API_KEY')
-            nr_account_id = os.environ.get('NR_ACCOUNT_ID')
+            nr_api_key = os.environ.get("NR_API_KEY")
+            nr_account_id = os.environ.get("NR_ACCOUNT_ID")
         else:
-            nr_api_key = os.environ.get('NR_API_KEY_%s' % self.environment.upper())
-            nr_account_id = os.environ.get('NR_ACCOUNT_ID_%s' % self.environment.upper())
+            nr_api_key = os.environ.get("NR_API_KEY_%s" % self.environment.upper())
+            nr_account_id = os.environ.get(
+                "NR_ACCOUNT_ID_%s" % self.environment.upper()
+            )
+            if not nr_account_id or not nr_api_key:
+                print(colorful.bold("%s account environment variables not set." % self.environment))
         return nr_api_key, nr_account_id
 
     def _make_request(self, query_stmt):
-        payload = {
-            'nrql': query_stmt
-        }
-        req = requests.get(self._url % self.account_id,
-                           headers={"X-Query-Key": self.api_key},
-                           params=payload)
+        payload = {"nrql": query_stmt}
+        req = requests.get(
+            self._url % self.account_id,
+            headers={"X-Query-Key": self.api_key},
+            params=payload,
+        )
         if self.verbose:
             print(colorful.bold("Request URL: %s" % req.url))
             print(colorful.bold("Status Code: %s" % req.status_code))
         response = req.json()
         self._print_messages(response)
         if not self.verbose:
-            response.pop('metadata', None)
-            response.pop('performanceStats', None)
+            response.pop("metadata", None)
+            response.pop("performanceStats", None)
 
         return response
 
@@ -119,7 +122,7 @@ class NRQL(object):
             else:
                 raise Exception("An api key and account id is required.")
 
-        if not self.region == 'US':
+        if not self.region == "US":
             self._url = self._eu_url
 
         resp = self._make_request(stmt)
